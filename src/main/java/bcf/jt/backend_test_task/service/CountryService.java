@@ -40,18 +40,14 @@ public class CountryService {
         countries = dataMapperService.loadCountriesData(fileURL);
     }
 
-    public HashMap<String, List<String>> getAnyPossibleRoad(final String origin, final String destination) throws FileNotFoundException {
+    public HashMap<String, List<String>> getAnyPossibleRoad(final String origin, final String destination) {
         checkCountryNameForCountOfLetters(origin, destination);
         final var originCountry = getCountryByName(origin, countries);
         final var destinationCountry = getCountryByName(destination, countries);
         final List<String> possibleRoad = new LinkedList<>();
-        if(originCountry != null && destinationCountry != null){
-            if (originCountry.equals(destinationCountry)) {
-                possibleRoad.add(originCountry.getShortCountryName());
-                return convertListOfCountriesToMap(possibleRoad);
-            }
-        } else {
-            throw new MainException(ErrorEnum.COUNTRY_CODE_NOT_FOUND);
+        if (originCountry.equals(destinationCountry)) {
+            possibleRoad.add(originCountry.getShortCountryName());
+            return convertListOfCountriesToMap(possibleRoad);
         }
         final Map<Country, Integer> distanceToCountry = new HashMap<>();
         distanceToCountry.put(originCountry, 0);
