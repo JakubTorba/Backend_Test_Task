@@ -52,22 +52,19 @@ class CountryServiceTest {
 
     @BeforeAll
     static void beforeAll() {
-        var testCountryUkr = new Country("UKR");
+        var testCountryAus = new Country("AUS");
         var testCountryPol = new Country("POL");
-        var testCountryGer = new Country("GER");
+        var testCountryIta = new Country("ITA");
         var testCountryFra = new Country("FRA");
         var testCountryUsa = new Country("USA");
         var testCountryRus = new Country("RUS");
-        testCountryUkr.setBorders(List.of(testCountryRus.getShortCountryName(),
-                testCountryPol.getShortCountryName()));
-        testCountryPol.setBorders(List.of(testCountryUkr.getShortCountryName(),
-                testCountryGer.getShortCountryName()));
-        testCountryGer.setBorders(List.of(testCountryFra.getShortCountryName(),
-                testCountryPol.getShortCountryName()));
-        testCountryRus.setBorders(List.of(testCountryUkr.getShortCountryName()));
-        testCountryFra.setBorders(List.of(testCountryGer.getShortCountryName()));
-        countryList = List.of(testCountryFra, testCountryGer, testCountryPol, testCountryRus,
-                testCountryUsa, testCountryUkr);
+        testCountryAus.setBorders(List.of(testCountryRus.getShortCountryName(), testCountryPol.getShortCountryName()));
+        testCountryPol.setBorders(List.of(testCountryAus.getShortCountryName(), testCountryIta.getShortCountryName()));
+        testCountryIta.setBorders(List.of(testCountryFra.getShortCountryName(), testCountryPol.getShortCountryName()));
+        testCountryRus.setBorders(List.of(testCountryAus.getShortCountryName()));
+        testCountryFra.setBorders(List.of(testCountryIta.getShortCountryName()));
+        countryList = List.of(testCountryFra, testCountryIta, testCountryPol, testCountryRus,
+                testCountryUsa, testCountryAus);
     }
 
     static Stream<Arguments> getAnyPossibleRoadData() {
@@ -82,8 +79,8 @@ class CountryServiceTest {
 
     static Stream<Arguments> getAnyPossibleRoadDataWithExceptionScenario() {
         return Stream.of(
-                Arguments.of("UKR", "USA"),
-                Arguments.of("GER", "USA")
+                Arguments.of("AUS", "USA"),
+                Arguments.of("ITA", "USA")
         );
     }
 
