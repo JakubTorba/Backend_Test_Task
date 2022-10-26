@@ -31,7 +31,7 @@ public class CountryService {
     private final DataMapperService dataMapperService;
 
     @Value("${file.url}")
-    private static String fileURL;
+    private String fileURL;
 
     private List<Country> countries;
 
