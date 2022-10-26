@@ -7,6 +7,9 @@
 ### This is an application that returns the road from a country to another country.
 ### Usage:
 ### endpoint /routing/{origin}/{destination}.
-### Example of country code: Ukraine -> "UKR".
+### Example of country code:
+###Ukraine -> "UKR".
+###Poland -> "POL".
+###Italy -> "ITA".
 ### Application returns a list in JSON.
 ### If there is not a road, app returns exception (NOT_FOUND).
