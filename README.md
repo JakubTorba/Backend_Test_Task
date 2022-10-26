@@ -8,8 +8,8 @@
 ### Usage:
 ### endpoint /routing/{origin}/{destination}.
 ### Example of country code:
-###Ukraine -> "UKR".
-###Poland -> "POL".
-###Italy -> "ITA".
+Ukraine -> "UKR".
+Poland -> "POL".
+Italy -> "ITA".
 ### Application returns a list in JSON.
 ### If there is not a road, app returns exception (NOT_FOUND).
