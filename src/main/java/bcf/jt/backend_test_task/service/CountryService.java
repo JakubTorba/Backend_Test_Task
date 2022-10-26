@@ -84,7 +84,7 @@ public class CountryService {
                 }
             }
         }
-        throw new FileNotFoundException();
+        throw new MainException(ErrorEnum.ROAD_NOT_FOUND);
     }
 
     public HashMap<String, List<String>> convertListOfCountriesToMap(List<String> possibleRoad) {
