@@ -3,7 +3,8 @@ package bcf.jt.backend_test_task.service;
 import bcf.jt.backend_test_task.exception.ErrorEnum;
 import bcf.jt.backend_test_task.exception.MainException;
 import bcf.jt.backend_test_task.model.Country;
-import lombok.Value;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
@@ -11,28 +12,32 @@ import org.springframework.stereotype.Service;
 import javax.annotation.PostConstruct;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.nio.file.FileSystemNotFoundException;
-import java.util.*;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Queue;
+import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.Collections;
+
 
 @Log4j2
+@RequiredArgsConstructor
 @Primary
 @Service
 public class CountryService {
 
-    final DataMapperService dataMapperService;
+    private final DataMapperService dataMapperService;
 
-
-    private final String FILE_URL = "https://raw.githubusercontent.com/mledoze/countries/master/countries.json";
+    @Value("${file.url}")
+    private static String fileURL;
 
     private List<Country> countries;
 
-    public CountryService(DataMapperService dataMapperService) {
-        this.dataMapperService = dataMapperService;
-    }
-
     @PostConstruct
     public void loadData() throws IOException {
-        countries = DataMapperService.loadCountriesData(FILE_URL);
+        countries = dataMapperService.loadCountriesData(fileURL);
     }
 
     public HashMap<String, List<String>> getAnyPossibleRoad(final String origin, final String destination) throws FileNotFoundException {
@@ -40,9 +45,13 @@ public class CountryService {
         final var originCountry = getCountryByName(origin, countries);
         final var destinationCountry = getCountryByName(destination, countries);
         final List<String> possibleRoad = new LinkedList<>();
-        if (originCountry.equals(destinationCountry)) {
-            possibleRoad.add(originCountry.getShortCountryName());
-            return convertListOfCountriesToMap(possibleRoad);
+        if(originCountry != null && destinationCountry != null){
+            if (originCountry.equals(destinationCountry)) {
+                possibleRoad.add(originCountry.getShortCountryName());
+                return convertListOfCountriesToMap(possibleRoad);
+            }
+        } else {
+            throw new MainException(ErrorEnum.COUNTRY_CODE_NOT_FOUND);
         }
         final Map<Country, Integer> distanceToCountry = new HashMap<>();
         distanceToCountry.put(originCountry, 0);

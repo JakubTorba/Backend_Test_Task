@@ -17,7 +17,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @RestController
 public class CountryController {
-    final CountryService countryService;
+    private final CountryService countryService;
 
     @GetMapping(value = "/routing/{origin}/{destination}", produces = MediaType.APPLICATION_JSON_VALUE)
     public HashMap<String, List<String>> getAnyPossibleRoad(@PathVariable final String origin, @PathVariable final

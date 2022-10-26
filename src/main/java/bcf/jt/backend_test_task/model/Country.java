@@ -35,8 +35,4 @@ public class Country {
     public int hashCode() {
         return Objects.hash(getShortCountryName());
     }
-
-    public Country(String shortCountryName) {
-        this.shortCountryName = shortCountryName;
-    }
 }

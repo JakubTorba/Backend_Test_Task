@@ -11,4 +11,5 @@ public class MainException extends RuntimeException {
         super(errorEnum.getMessage());
         this.errorEnum = errorEnum;
     }
+
 }

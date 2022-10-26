@@ -10,7 +10,8 @@ public enum ErrorEnum {
     ROAD_NOT_FOUND("002", "Road not found", HttpStatus.NOT_FOUND),
     FILE_NOT_FOUND("003", "File not found", HttpStatus.NOT_FOUND),
     COUNTRY_NAME_IS_INVALID("004", "Name of country can not be empty or null!", HttpStatus.BAD_REQUEST),
-    COUNTRY_NAME_LENGTH_IS_INVALID("005", "Country name should have 3 letters", HttpStatus.BAD_REQUEST);
+    COUNTRY_NAME_LENGTH_IS_INVALID("005", "Country name should have 3 letters", HttpStatus.BAD_REQUEST),
+    COUNTRY_CODE_NOT_FOUND("006", "Country code not found!", HttpStatus.BAD_REQUEST);
 
     private final String errorCode;
     private final String message;
